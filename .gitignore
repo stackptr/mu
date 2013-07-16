@@ -1,0 +1,13 @@
+# Extensions
+*.diff
+*.err
+*.orig
+*.log
+*.swp
+*.swo
+*.zip
+*.vi
+*~
+
+# Ignore modules
+node_modules
