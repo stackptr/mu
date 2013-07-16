@@ -1,0 +1,20 @@
+{
+  "name": "mu-url",
+  "version": "0.0.1",
+  "private": "true",
+  "description": "micro url service",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stackptr/mu.git"
+  },
+  "author": "stackptr",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/stackptr/mu.git/issues"
+  },
+  "devDependencies": {
+    "express": "~3.3.4",
+    "short": "~1.7.0"
+  }
+}
