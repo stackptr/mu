@@ -7,10 +7,15 @@ short.connect("mongodb://localhost/short");
 
 var app = module.exports = express();
 
-app.use(express.static(__dirname + '/');
+app.get('/s/*', submit);
+app.get('/p/*', preview);
+app.get('/dashboard', dashboard);
+app.get('/*', retrieve);
+    
+app.listen(3030);
 
 // URL submission and API route
-app.get('/s/*', function(req, res) {
+function submit(req, res) {
     if (req.url === '/favicon.ico') return;
 
     var URL = req.url.slice(3);
@@ -33,13 +38,14 @@ app.get('/s/*', function(req, res) {
             if (ua.indexOf('curl') != -1){
                 res.send("URL: " + fullURL + "\n");
             } else {
+                res.send({url: fullURL});
             }
         }
     });
-});
+}
 
 // URL preview route
-app.get('/p/*', function(req, res) {
+function preview(req, res) {
     if (req.url === '/favicon.ico') return;
 
     var hash = req.url.slice(1);
@@ -51,15 +57,15 @@ app.get('/p/*', function(req, res) {
             res.send("URL: " + fullURL + "\n");
         }
     });
-});
+}
 
 // Dashboard route
-app.get('/dashboard', function(req, res) {
+function dashboard(req, res) {
 
-});
+}
 
 // URL retrieval route
-app.get('/*', function(req, res) {
+function retrieve(req, res) {
     if (req.url === '/favicon.ico') return;
 
     var hash = req.url.slice(1);
@@ -70,10 +76,9 @@ app.get('/*', function(req, res) {
             if (shortURL) {
                 res.redirect(shortURL.URL, 302);
             } else {
-                res.writeHeader(404).end();
+                return res.send(404);
             }
         }
     });
-});
+}
 
-app.listen(3030);
