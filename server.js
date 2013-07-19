@@ -3,26 +3,34 @@ var url = require('url'),
     short = require('short'),
     check = require('validator').check;
 
-short.connect("mongodb://localhost/short");
 
-var app = module.exports = express()
-    .use(express.logger('dev'))
-    .use(express.static(__dirname + '/app'))
-    .set('views', __dirname + '/app/views')
-    .set('view engine', 'jade');
+function init (conf) {
+    var defaults = {
+        port: 3030
+    };
 
-app.locals({pretty: 'true'});
-
-app.configure(function(){ app.use(express.bodyParser());});
-
-app.get('/', front);
-app.post('/', submit);
-app.get('/s/*', submit);
-app.get('/p/*', preview);
-app.get('/dashboard', dashboard);
-app.get('/*', retrieve);
+    conf = conf || defaults;
     
-app.listen(3030);
+    short.connect("mongodb://localhost/short");
+
+    var app = module.exports = express()
+        .use(express.logger('dev'))
+        .use(express.static(__dirname + '/app'))
+        .use(express.bodyParser())
+        .set('views', __dirname + '/app/views')
+        .set('view engine', 'jade');
+    app.locals({pretty: 'true'});
+
+    app.get('/', front);
+    app.post('/', submit);
+    app.get('/s/*', submit);
+    app.get('/p/*', preview);
+    app.get('/dashboard', dashboard);
+    app.get('/*', retrieve);
+
+    return app;
+}
+    
 
 // Front page
 function front(req, res) {
@@ -104,3 +112,9 @@ function retrieve(req, res) {
     });
 }
 
+// Allow app to to run independently or mounted as a sub-app
+if (require.main === module) {
+    init().listen(defaults.port);
+}
+
+module.exports = exports = init;
