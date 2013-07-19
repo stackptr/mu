@@ -1,0 +1,39 @@
+//- Page template
+
+include ../includes/pages
+
+block pageTitle
+    pageTitle = "Test"
+
+doctype
+html
+    head
+        meta(charset="utf-8")
+        block title
+            title!= "x64 &mdash; " + pageTitle
+
+        block styles
+            link(rel="stylesheet", type="text/css", media="screen", href="css/bootstrap.min.css")
+            link(rel="stylesheet", type="text/css", media="screen", href="css/font-awesome.min.css")
+            link(rel="stylesheet", type="text/css", media="screen", href="css/main.css")
+            link(rel="shortcut icon", type="image/png", href="favicon.png")
+
+        //if lt IE 9
+            script(src="//html5shim.googlecode.com/svn/trunk/html5.js")
+
+        block scripts-pre
+            script(src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js")
+            script(src="//ajax.googleapis.com/ajax/libs/webfont/1.4.6/webfont.js")
+
+        script.
+            WebFont.load({ google: { families: ['Open Sans'] } });
+    body
+        .row.container
+            aside.span4
+                mixin pageList(pages, pageTitle)
+            article.span7
+               block content 
+            footer.span12
+                include ../includes/footer
+        block scripts-post
+            script(src="js/bootstrap.min.js")

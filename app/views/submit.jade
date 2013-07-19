@@ -1,0 +1,10 @@
+extends layouts/main
+
+block pageTitle
+    pageTitle = "mu"
+
+block content
+    h1 shortened url:
+    p
+        a(href=url)=url
+

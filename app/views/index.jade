@@ -1,0 +1,11 @@
+extends layouts/main
+
+block pageTitle
+    pageTitle = "mu"
+
+block content
+    h1 url shortener
+    form.input-append.span11(method="POST")
+        input.input-block-level(type="text", name="url")
+        button.btn(type="submit")
+            i.icon-arrow-right

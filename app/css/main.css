@@ -1,0 +1,74 @@
+body {
+    background-image: url(../img/bg.png);
+    background-color: #CCCCCC;
+    font-size: 13px;
+    padding-top: 140px;
+    padding-bottom: 40px;
+
+}
+
+.container {
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+       -moz-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.30), 0 0 40px rgba(0, 0, 0, 0.10) inset;
+    padding: 44px 40px 26px 40px;
+}
+
+h1, h2, h3, h4, h5, p, li {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5 { font-weight: 600; }
+p, li { font-weight: 400; }
+h1 { font-size: 1.5em; }
+
+section, aside { margin-right: 1em;}
+
+ul.contact {
+    margin:0;
+    list-style-type: none;
+}
+ul.contact li {
+    display: inline;
+    margin-right: 18px;
+}
+
+ul.contact li a {
+    color:inherit;
+}
+
+div[class="tooltip-inner"] {
+    min-width:50px;
+}
+
+ul > li {
+    margin: 0;
+}
+
+/*******************************/
+/* Thanks: http://is.gd/xI4pv6 */
+ul.collapse {
+  left: -2.142857142857143em;
+}
+.collapse li {
+  left: 2.142857142857143em;
+}
+
+a i {
+  color: #333;
+}
+
+a:hover i {
+  text-decoration: none;  
+}
+/*******************************/
+
+pre {
+    font-size: 10px;
+    background-color: inherit;
+    border: 0;
+}
