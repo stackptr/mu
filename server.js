@@ -14,7 +14,6 @@ function init (conf) {
     short.connect("mongodb://localhost/short");
 
     var app = module.exports = express()
-        .use(express.logger('dev'))
         .use(express.static(__dirname + '/app'))
         .use(express.bodyParser())
         .set('views', __dirname + '/app/views')
@@ -114,7 +113,12 @@ function retrieve(req, res) {
 
 // Allow app to to run independently or mounted as a sub-app
 if (require.main === module) {
-    init().listen(defaults.port);
+    var app = init()
+        .use(express.logger('dev'));
+
+    app.locals({pretty: 'true'});
+
+    app.listen(defaults.port);
 }
 
 module.exports = exports = init;
