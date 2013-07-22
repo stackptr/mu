@@ -3,11 +3,11 @@ var url = require('url'),
     short = require('short'),
     check = require('validator').check;
 
+var defaults = {
+    port: 3030
+};
 
 function init (conf) {
-    var defaults = {
-        port: 3030
-    };
 
     conf = conf || defaults;
     
@@ -61,7 +61,7 @@ function submit(req, res) {
             return res.send(500);
         } else {
             var ua = req.get('user-agent');
-            var fullURL = req.protocol + "://" + req.get('host') + '/' + shortURL.hash;
+            var fullURL = req.protocol + "://" + req.get('host') + '/' + req.app.path() + shortURL.hash;
 
             if (ua.indexOf('curl') != -1){
                 res.send("URL: " + fullURL + "\n");
@@ -83,7 +83,7 @@ function preview(req, res) {
         if (err) {
             return res.send(500);
         } else {
-            var fullURL = req.protocol + "://" + req.get('host') + '/' + shortURL.hash;
+            var fullURL = req.protocol + "://" + req.get('host') + '/' + req.app.path() + shortURL.hash;
             res.send("URL: " + fullURL + "\n");
         }
     });
