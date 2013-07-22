@@ -1,6 +1,6 @@
 {
   "name": "mu-url",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "micro url service",
   "main": "./server.js",
   "repository": {
