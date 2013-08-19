@@ -9,7 +9,7 @@ var config = {
 	port: 3000,
 	url: {
 		locals: {
-			pretty: "false"
+			pretty: false
 		}
 	}
 };

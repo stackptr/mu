@@ -7,14 +7,16 @@ var url     = require('url'),
 var defaults = {
     port: 3030,
     locals: {
-        pretty: "true"
+        pretty: true,
+        date: new Date()
     }
 };
 
 function init (conf) {
 
-    conf = conf || defaults;
-    
+    nconf.overrides(conf);
+    nconf.defaults(defaults);
+
     short.connect("mongodb://localhost/short");
 
     var app = module.exports = express()
@@ -22,7 +24,8 @@ function init (conf) {
         .use(express.bodyParser())
         .set('views', __dirname + '/app/views')
         .set('view engine', 'jade');
-    app.locals(conf.locals);
+
+    app.locals = nconf.get('locals');
 
     app.get('/', front);
     app.post('/', submit);
@@ -37,7 +40,7 @@ function init (conf) {
 
 // Front page
 function front(req, res) {
-    res.render('index', {date: new Date()});
+    res.render('index');
 }
 
 // URL submission and API route
@@ -120,10 +123,8 @@ if (require.main === module) {
     var app = init()
         .use(express.logger('dev'));
 
-    app.locals(defaults.locals);
-
-    console.log('Listening on port ' + defaults.port);
-    app.listen(defaults.port);
+    console.log('Listening on port ' + nconf.get('port'));
+    app.listen(nconf.get('port'));
 }
 
 module.exports = exports = init;
