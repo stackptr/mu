@@ -1,10 +1,14 @@
-var url = require('url'),
+var url     = require('url'),
     express = require('express'),
-    short = require('short'),
-    check = require('validator').check;
+    nconf   = require('nconf'),
+    short   = require('short'),
+    check   = require('validator').check;
 
 var defaults = {
-    port: 3030
+    port: 3030,
+    locals: {
+        pretty: "true"
+    }
 };
 
 function init (conf) {
@@ -18,7 +22,7 @@ function init (conf) {
         .use(express.bodyParser())
         .set('views', __dirname + '/app/views')
         .set('view engine', 'jade');
-    app.locals({pretty: 'true'});
+    app.locals(conf.locals);
 
     app.get('/', front);
     app.post('/', submit);
@@ -116,8 +120,9 @@ if (require.main === module) {
     var app = init()
         .use(express.logger('dev'));
 
-    app.locals({pretty: 'true'});
+    app.locals(defaults.locals);
 
+    console.log('Listening on port ' + defaults.port);
     app.listen(defaults.port);
 }
 
